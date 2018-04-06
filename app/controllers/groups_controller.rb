@@ -1,4 +1,6 @@
 class GroupsController < ApplicationController
+  before_action :require_group_logged_in, only:[:index, :show]
+  
   def index
   end
 
@@ -25,6 +27,6 @@ class GroupsController < ApplicationController
   private
   
   def group_params
-    prams.require(:group).permit(:group_name, :password, :password_confirmation)
+    params.require(:group).permit(:group_name, :password, :password_confirmation)
   end
 end
