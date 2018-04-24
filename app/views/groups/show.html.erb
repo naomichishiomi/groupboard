@@ -1,22 +1,94 @@
-<% if logged_in_group? %>
-
-  <div class="row">
-    <div class="col-xs-offset-1 col-xs-2">メンバー名</div>
-    <div class="col-xs-2"><form></form></div>
-    <div class="col-xs-2">メンバーパス</div>
-    <div class="col-xs-2"><form></form></div>
+<%# <% if logged_in_group? %>
+<%#  <div class="row">
+    <div class="text-right col-md-offset-1 col-md-10">
+      <%= form_for(:session, url: login_path) do |f| %>
+        
+<%#        <div class="form-group">
+          <div class="col-xs-4 col-md-2">
+            <%= f.label :member_name, "メンバー名" %>
+<%#          </div>
+          <div class="col-xs-5 col-md-2">
+            <%= f.text_field :member_name, class: "form-control" %>
+<%#          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-4 col-md-2">
+            <%= f.label :password, "メンバーパス" %>
+<%#          </div>
+          <div class="col-xs-5 col-md-2">
+            <%= f.password_field :password, class: "form-control" %>
+<%#          </div>
+        </div>
+        <%= f.hidden_field :group_id, value: @group.id %>
+<%#        <div class="col-xs-3 col-md-2">
+          <%= f.submit "ログイン", class: "btn btn-success btnblock" %>
+<%#        </div>
+      <% end %>
+<%#    </div>
   </div>
 <% elsif %>
-投稿フォーム
+<%#投稿フォー
+<#<% end %>
+<%= render 'layouts/navbar', group: @group, role: @role  %>
+<%= render "layouts/flash_messages" %>
+<div class="row">
+<h3 class=" col-xs-11 col-md-offset-1 col-md-10 group_name">グループ名：<%= @group.group_name %></h3><br>
+<% if current_member.group_id == @group.id %><h2 class=" col-xs-11 col-md-offset-1 col-md-10">メンバー名：<%= @member.member_name%></h2><% end %>
+<% if current_member.admin == true %>
+ <div class="col-xs-offset-1 col-xs-6 col-md-offset-1 col-md-4">
+  <%= form_for(@group) do |f| %>
+  <%= render "layouts/error_messages", model: f.object %>
+    <%= f.label :group_name, "グループ名の変更" %>
+    <%= f.text_field :group_name %>
+    <%= f.submit "変更" %>
+  <% end %>
+ </div>
+
+  <% if @members.count == 0 %>
+    <div class="row">
+      
+      <%= form_for(@member, url: members_path, html: {method: "post"}) do |f| %>
+        <div class="col-xs-2 col-md-2 text-right">
+        <%= label :people, "初期メンバー人数" %>
+        </div>
+        <div class="col-xs-2 col-md-2">
+        <%= number_field :people, :count, class: "form-control" %>
+        <%= hidden_field_tag :groupnumber, @group.id %>
+        </div>
+        <div class="col-xs-2 col-md-2">
+        <%= f.submit "作成" , class: "btn btn-primary btn-block" %>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <%#= link_to "メンバーの作成", @member, method: :create, class: 'btn btn-success btn-xs' %>
+    <div class="col-xs-4 col-md-6">
+    <%= form_for(@member) do |f| %>
+      <%= hidden_field_tag :groupnumber, @group.id %>
+      <%= f.submit "新規メンバーの追加" , class: "btn btn-primary btn-block" %>
+    <% end %>
+    </div>
+  <% end %>
+<% elsif current_member.admin == false && current_member.group_id == @group.id %>
+  <div class="row">
+    <%= form_for(@comment) do |f| %>
+      <div class="form-group col-xs-offset-1 col-xs-8 col-md-offset-1 col-md-8">
+        <%= f.text_area :content, class: "form-control", rows: 5 %>
+        <%= hidden_field_tag :groupnumber, @group.id %>
+      </div>
+      <div class="col-xs-2 col-md-2">
+        <%= f.submit "投稿", class: "btn btn-primary btn-block" %>
+        <%= link_to "編集", edit_member_path(@member), class: "btn btn-warning btn-block" %>
+      </div>
+    <% end %>
+  </div>
 <% end %>
 
-
-
 <div class="row">
-  <div class="col-xs-5 col-md-offset-1 col-md-4">
-    メンバー名
+  <div class="col-xs-offset-1 col-xs-4 col-md-offset-1 col-md-4">
+    <%= render "members/members", members: @members %>
   </div>
-  <div class="col-xs-7 col-md-6">
-    コメント
+  <div class="col-xs-6 col-md-6">
+    <%= render 'comments/comments', comments: @comments %>
   </div>
 </div>

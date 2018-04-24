@@ -1,0 +1,18 @@
+<h2 class="text-center">コメント一覧</h2>
+<% comments.each do |comment| %>
+  <div class="panel panel-info">
+	  <div class="panel-heading">
+	    <%= comment.member.number %>
+		 	<%= comment.member.member_name %>
+		 	<%= comment.created_at %>
+		</div>
+	  <div class="panel-body">
+		  <%= simple_format(comment.content) %>
+		  <% if current_member.admin == true %>
+		  	<%= link_to "コメントの削除", comment_path(:comment_id => comment.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-xs pull-right' %>
+	  	<% end %>
+	  </div>
+  </div>
+<% end %>
+
+<% paginate comments %>

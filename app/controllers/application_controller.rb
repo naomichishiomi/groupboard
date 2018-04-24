@@ -5,8 +5,8 @@ class ApplicationController < ActionController::Base
 
   private
   
-  def require_group_logged_in
-    unless logged_in_group?
+  def require_member_logged_in
+    unless logged_in_member?
       redirect_to root_url
     end
   end

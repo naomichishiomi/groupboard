@@ -13,3 +13,56 @@
  *= require_tree .
  *= require_self
  */
+
+
+@charset "utf-8";
+
+.group_panel {
+  height: 80px;
+}
+
+.container {
+  width: auto;
+  padding: 0;
+}
+
+h3 {
+  margin: 0;
+}
+
+h2 {
+  margin: 0;
+}
+
+.about_title {
+  margin-bottom: 100px;
+}
+
+.about_commnt {
+  font-size: 1.4em;
+}
+
+.about_pic {
+  margin-bottom: 20px;
+}
+
+.about_pass {
+  font-size: 1.6em;
+  color: red;
+}
+
+.alert {
+  margin: 0;
+}
+
+.navbar {
+  margin-bottom:  0;
+}
+
+.group_button {
+  margin-top: 20px;
+}
+
+.group_name {
+  margin-top: 10px;
+}

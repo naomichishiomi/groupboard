@@ -15,8 +15,10 @@
   </head>
 
   <body>
+   <%#    <%= render 'layouts/navbar', group: @group, role: @role  %>
+   
     <div class="container">
-      <% render "layouts/flash_messages" %>
+<%#      <%= render "layouts/flash_messages" %>
       <%= yield %>
     </div>
   </body>

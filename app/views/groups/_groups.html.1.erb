@@ -1,0 +1,19 @@
+<% if groups.any? %>
+  <% groups.each do |group| %>
+    <% unless group.group_name == role.name + '-' +  "admin" %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <%= group.group_name %>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <%= if member.admin == true %>
+          
+          <div>最新コメント</div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+  <%= paginate groups %>
+<% end %>

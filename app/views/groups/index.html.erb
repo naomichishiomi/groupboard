@@ -1,26 +1,24 @@
-<a href="#">グループに戻る</a>
+<%= render "layouts/flash_messages" %>
+<% if logged_in_member? %>
+
+  <div class="row">
+    <%= form_for(@comment) do |f| %>
+      <div class="form-group col-md-offset-1 col-md-8">
+        <%= f.text_area :content, class: "form-control", rows: 5 %>
+        <%= hidden_field_tag :groupnumber, @group.id %>
+      </div>
+      <div class="col-md-2">
+        <%= f.submit "投稿", class: "btn btn-primary btn-block" %>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
 <div class="row">
-  <div class="col-xs-12 col-md-offset-2 col-md-8">
-    <div class="center">
-      <h1>メンバー名 メンバーパス</h1>
-    </div>
-    <div>グループに参加しているめんばーは、グループ画面上部のフォームへ、ご自身のメンバー名とメンバーパスを入力することで、コメントの投稿と、メンバー情報の編集を行うことができるようになります。</dv>
-    <div>初期状態のメンバー名とメンバーパスは以下のようになります。</div>
-    <div>
-      メンバー名 ：member + メンバー番号<br>
-      例 1番目のメンバーなら『member1』<br>
-      10番目のメンバーなら『member10』
-    </div>
-    <div>
-      メンバーパス ：『グループ名』+『メンバー番号』<br>
-      例 グループ名『class11』の1番目のメンバー<br>
-      →class111<br>
-      グループ名『bookstore』の10番目のメンバー<br>
-      →bookstore10
-    </div>
-    <div>
-      メンバー名とメンバーパスは、メンバーとしてログイン後、『メンバー情報の編集』で変更することができます。<br>
-      変更後はご自身の入力した情報を忘れないように気をつけてください。
-    </div>
+  <div class="col-xs-5 col-md-offset-1 col-md-4">
+    <%= render "members/members", members: @members %>
+  </div>
+  <div class="col-xs-7 col-md-6">
+    <%= render 'comments/comments', comments: @comments %>
   </div>
 </div>

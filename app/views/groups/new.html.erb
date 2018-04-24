@@ -10,13 +10,17 @@
         <%= f.label :group_name, "新規グループ名：英数字入力" %>
         <%= f.text_field :group_name, class: "form-control" %>
       </div>
+<%#      <div class="form-group">%>
+<%#        <%= f.label :password, "新規グループパス" %>
+<%#        <%= f.password_field :password, class: "form-control" %>
+<%#      </div>%>
+<%#      <div class="form-group">%>
+<%#        <%= f.label :password_confirmation, "新規グループパス 確認フォーム" %>
+<%#        <%= f.password_field :password_confirmation, class: "form-control" %>
+<%#      </div>%>
       <div class="form-group">
-        <%= f.label :password, "新規グループパス" %>
-        <%= f.password_field :password, class: "form-control" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation, "新規グループパス 確認フォーム" %>
-        <%= f.password_field :password_confirmation, class: "form-control" %>
+        <%= label :people, "新規グループ参加メンバー人数" %>
+        <%= number_field :people, :count, class: "form-control" %>
       </div>
       
       <%= f.submit "グループを登録する", class: "btn btn-primary btn-block" %>

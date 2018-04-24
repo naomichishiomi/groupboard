@@ -1,0 +1,34 @@
+<%= render "layouts/flash_messages" %>
+<h1 class="text-center">メンバー:
+<%= @member.member_name %>
+ 編集ページ</h1>
+
+
+<div class="row">
+  <div class="col-xs-offset-2 col-xs-8 col-md-6 col-md-offset-3">
+
+    <%= form_for(@member) do |f| %>
+    <%= render "layouts/error_messages", model: f.object %>
+
+      <div class="form-group">
+        <%= f.label :member_name, '変更後メンバー名' %>
+        <%= f.text_field :member_name, class: 'form-control' %>
+      </div>
+
+
+      <div class="form-group">
+        <%= f.label :password, '変更後パスワード' %>
+        <%= f.password_field :password, class: 'form-control' %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :password_confirmation, '変更後パスワード：再入力' %>
+        <%= f.password_field :password_confirmation, class: 'form-control' %>
+      </div>
+
+      <%= f.submit '変更', class: 'btn btn-primary btn-block' %>
+    <% end %>
+  </div>
+</div>
+
+<%= link_to 'グループに戻る', group_path(@group) %>

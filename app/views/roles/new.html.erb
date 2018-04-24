@@ -1,0 +1,65 @@
+<%= render "layouts/flash_messages" %>
+<div class="row">
+<div class="text-left col-xs-6">
+  <%= link_to  "<<トップページへ", root_path %>
+</div>
+</div>
+
+<div class="text-center">
+  <h1>新規Role作成</h1>
+</div>
+
+<div class="row">
+  <div class="col-md-6 col-md-offset-3">
+    <%= form_for(@form, :url => {:controller => :roles, :action => :create}) do |f| %>
+      <%= render "layouts/error_messages", model: f.object %>
+      <div class="form-group">
+        <%= f.label :name, "新規Role名：英数字入力" %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+      <div class="form-group">
+        <%= f.label :mass, "参加グループ数" %>
+        <%= f.number_field :count, class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :admin_name, "role管理名" %>
+        <%= f.text_field :admin_name, class: "form-control" %>
+        <p>管理者のメンバー名は『role名-role管理名』になります.</p>
+        <p>例：role名「gakunen」 role管理名「admin」の場合、管理者のメンバー名は『gakunen-admin』になります。</p>
+      </div>
+      <div class="form-group">
+        <%= f.label :password, "role管理パス" %>
+        <%= f.text_field :password, class: "form-control" %>
+      </div>
+      
+      <%= f.submit "Roleを登録する", class: "btn btn-primary btn-block" %>
+      
+    <% end %>
+    
+    
+<%#    <%= form_for(@role) do |f| %>
+<%#      <%= render "layouts/error_messages", model: f.object %>
+<%#      <div class="form-group">
+<%#        <%= f.label :name, "新規Role名：英数字入力" %>
+<%#        <%= f.text_field :name, class: "form-control" %>
+<%#      </div>
+      <div class="form-group">
+        <%= label :mass, "参加グループ数" %>
+<%#        <%= number_field :mass, :count, class: "form-control" %>
+<%#      </div>
+      
+      <div class="form-group">
+        <%= label :admin_name, "role管理者名" %>
+<%#        <%= text_field :admin_name, :admin_name, class: "form-control" %>
+<%#      </div>
+      <div class="form-group">
+        <%= label :admin_pass, "role管理パス" %>
+<%#        <%= text_field :admin_pass, :password, class: "form-control" %>
+<%#      </div>
+      
+      <%= f.submit "Roleを登録する", class: "btn btn-primary btn-block" %>
+      
+<%#    <% end %>
+  </div>
+</div>

@@ -1,0 +1,18 @@
+<h2 class="text-center">メンバー一覧</h2>
+<% if members.any? %>
+  <% members.each do |member| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <%= member.number %>:<%= member.member_name %>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <% if current_member.admin == true %>
+		  	  <%= link_to "メンバーの削除", member_path(:member_id => member.id), method: :delete, data: { confirm: "本当に削除しますか？" }, class: 'btn btn-danger btn-xs pull-right' %>
+	  	  <% end %>
+      </div>
+    </div>
+  <% end %>
+  <%= paginate members %>
+<% end %>
